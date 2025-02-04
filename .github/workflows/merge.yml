@@ -57,4 +57,4 @@ jobs:
           username:  ${{ secrets.TAILSCALE_SSH_USER }}
           key: ${{ secrets.TAILSCALE_SSH_KEY }}
           port: ${{ secrets.TAILSCALE_SSH_SERVER_PORT }}
-          script: cd ${{ secrets.DOCKER_ROOT }}/${{ steps.repo-name.outputs.repository-name }}-static && docker compose down && docker compose pull  && docker compose up -d
+          script: cd ${{ secrets.DOCKER_ROOT }}/${{ steps.repo-name.outputs.repository-name }}.uk-static && docker compose down && docker compose pull  && docker compose up -d
