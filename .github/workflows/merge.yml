@@ -25,7 +25,8 @@ jobs:
         run: |
           sed -i 's/REPO_NAME/${{ steps.repo-name.outputs.repository-name }}/g' docker-compose.yml
           sed -i 's/-ENV/-prod/g' docker-compose.yml
-          sed -i 's/display: flex/display: none/g' publish/*html
+          sed -i 's/display: flex/display: none/g' publish/web/*html
+          sed -i 's/display: flex/display: none/g' publish/mobile/*html
       - name: Build and push Docker images
         run: |
           TIMESTAMP=$(date +%s)
