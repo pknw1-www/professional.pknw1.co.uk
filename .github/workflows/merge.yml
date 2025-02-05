@@ -16,6 +16,7 @@ jobs:
         with:
           with-owner: 'false'
           string-case: 'lowercase'
+      - run: echo '### Starting Build for '${{ steps.repo-name.outputs.repository-name }} >> $GITHUB_STEP_SUMMARY
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -36,16 +37,24 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.repo-name.outputs.repository-name }}:${TIMESTAMP}
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.repo-name.outputs.repository-name }}:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.repo-name.outputs.repository-name }}:latest
+          echo '### Pushed Docker Tags latest and '${TIMESTAMP} >> $GITHUB_STEP_SUMMARY
       - uses: actions/upload-artifact@v4
         with:
           name: docker-compose
           path: docker-compose.yml
+      - run: echo '### Added docker-compose artifact' >> $GITHUB_STEP_SUMMARY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: export
+          path: export/*
+      - run: echo '### Added export artifact' >> $GITHUB_STEP_SUMMARY
       - name: Tailscale
         uses: tailscale/github-action@v3
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ovh
+      - run: echo '### Connected to TailNet' >> $GITHUB_STEP_SUMMARY
       - name: Set up SSH key
         run: |
           env
@@ -53,10 +62,21 @@ jobs:
           echo "${{ secrets.TAILSCALE_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
       - name: executing remote ssh commands using password
+        if: ${{ vars.DIRECTORY_OVERRIDE == '' }}
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.TAILSCALE_SSH_SERVER }}
           username:  ${{ secrets.TAILSCALE_SSH_USER }}
           key: ${{ secrets.TAILSCALE_SSH_KEY }}
           port: ${{ secrets.TAILSCALE_SSH_SERVER_PORT }}
-          script: cd ${{ secrets.DOCKER_ROOT }}/${{ steps.repo-name.outputs.repository-name }}-static && docker compose down && docker compose pull  && docker compose up -d
+          script: cd /etc/pknw1/docker/${{ steps.repo-name.outputs.repository-name }} && docker compose down && docker compose pull && docker compose up -d
+      - name: executing remote ssh commands using password
+        if: ${{ vars.DIRECTORY_OVERRIDE != '' }}
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.TAILSCALE_SSH_SERVER }}
+          username:  ${{ secrets.TAILSCALE_SSH_USER }}
+          key: ${{ secrets.TAILSCALE_SSH_KEY }}
+          port: ${{ secrets.TAILSCALE_SSH_SERVER_PORT }}
+          script: cd /etc/pknw1/docker/${{ vars.DIRECTORY_OVERRIDE }} && docker compose down && docker compose pull && docker compose up -d
+      - run: echo '### Pulled and Reloaded Server Compose File' >> $GITHUB_STEP_SUMMARY
