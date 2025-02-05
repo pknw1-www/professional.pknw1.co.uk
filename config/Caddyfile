@@ -1,4 +1,9 @@
-:80 {
-        root * /publish
+engineering.pknw1.co.uk :80 {
+        root * /publish/web
+        file_server
+}
+
+mobile.engineering.pknw1.co.uk :80 {
+        root * /publish/mobile
         file_server
 }

@@ -29,7 +29,8 @@ jobs:
       - name: Build and push Docker Dev
         run: |
           TIMESTAMP=$(date +%s)
-          echo ${TIMESTAMP} > publish/version.html
+          echo ${TIMESTAMP} > publish/web/version.html
+          echo ${TIMESTAMP} > publish/mobile/version.html
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.repo-name.outputs.repository-name }}:${TIMESTAMP} .
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.repo-name.outputs.repository-name }}:dev .
           docker save --output="${{ steps.repo-name.outputs.repository-name }}.tar" ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.repo-name.outputs.repository-name }}:dev
