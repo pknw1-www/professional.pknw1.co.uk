@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=xiV4oz"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=xiV4oz" type="text/css">
+  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=JpEuXG"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=JpEuXG" type="text/css">
 
   
   
@@ -54,7 +54,7 @@
 					</li><li class="nav-item"><a class="nav-link link text-danger text-primary display-7" href="index.html#Info">Summary</a></li>
 					<li class="nav-item dropdown">
 						<a class="nav-link link text-danger dropdown-toggle display-7" href="https://mobiri.se" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside">Experience</a><div class="dropdown-menu" aria-labelledby="dropdown-968"><a class="text-danger dropdown-item text-primary display-7" href="index.html#timeline">Timeline</a><a class="text-danger dropdown-item text-primary display-7" href="https://cv.pknw1.co.uk" target="_blank">CV</a></div>
-					</li></ul>
+					</li><li class="nav-item"><a class="nav-link link text-danger show display-7" href="https://mobiri.se">Call Me!<br></a></li></ul>
 				
 				
 			</div>
@@ -106,6 +106,81 @@
 			</div>
 		</div>
 	</div>
+</section>
+
+<section class="mbr-section" id="witsec-modal-window-block-5" data-rv-view="39">
+
+	<style>
+	/* Let's not animate the contents of modal windows */
+	.no-anim {
+		-webkit-animation: none !important;
+		-moz-animation: none !important;
+		-o-animation: none !important;
+		-ms-animation: none !important;
+		animation: none !important;
+	}
+	</style>
+
+	
+	
+	<div><div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="messageLabel" aria-hidden="true">  <div class="modal-dialog  modal-dialog-centered" style="height:auto" role="document">    <div class="modal-content"><div class="modal-header">  <h5 class="no-anim modal-title display-7" id="messageLabel">Call Me!</h5>  <a href="#" class="no-anim close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></a></div><div class="modal-body display-7" id="message_body"><input type="text" id="inputText" name="inputText" placeholder="Your Name">
+<input type="text" id="inputNumber" name="inputNumber" placeholder="+447xxx xxxxxx">
+<button id="publishButton" class="btn btn-danger display-7 animate__animated animate__delay-1s animate__fadeIn"> Call Me! </button><p id="result"></p>Modal body text goes here.</div>    </div>  </div></div><script> 
+document.addEventListener("DOMContentLoaded", function() { 
+  if(typeof jQuery === "function") {
+    $("#message").on("hidden.bs.modal", function () { 
+      var html = $( "#message_body" ).html(); 
+      $( "#message_body" ).empty(); 
+      $( "#message_body" ).append(html); 
+    }) 
+  } else { 
+      var mdw = document.getElementById("#message") 
+      mdw.addEventListener("hidden.bs.modal", function(event) { 
+        mdw.innerHTML = mdw.innerHTML; 
+      }); 
+  } 
+}); 
+</script></div>
+
+	<script>
+	if (typeof OpenModal === 'undefined') {
+		OpenModal = function(modalName) {
+			if(typeof jQuery === "function") {
+				if ($('#' + modalName).length)
+					$('#' + modalName).modal('show');
+				else
+					alert("Sorry, but there is no modal for " + modalName);
+			} else {
+				let mdw = new bootstrap.Modal(document.getElementById(modalName), {});
+				mdw.show();
+			}
+		}
+	}
+
+	function modalSetCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+
+	function modalGetCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	</script>
+
 </section>
 
 <section data-bs-version="5.1" class="timeline3 cid-uBV6H6QOuP" id="timeline">
@@ -369,8 +444,42 @@
             </div>
         </div>
     </div>
-</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/1542662" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/builder/ai-website-generator.html">AI Website Generator</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
+</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/1542662" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/offline-website-builder.html">Offline Website Maker</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
   
-  
+  <script type="text/javascript">
+    const publishURL = `https://ntfy.sh/pknw1`;
+    const subscribeURL = `https://ntfy.sh/pknw1/sse`;
+    const events = document.getElementById('events');
+    const eventSource = new EventSource(subscribeURL);
+
+    // Publish button
+    document.getElementById("publishButton").onclick = () => {
+	var inputText = document.getElementById("inputText").value;
+        var inputNumber = document.getElementById("inputNumber").value;
+
+        fetch(publishURL, {
+            method: 'POST', // works with PUT as well, though that sends an OPTIONS request too!
+            body:`${new Date().toString()} `+inputText+` - `+inputNumber
+        })
+document.getElementById("publishButton").innerHTML = "Message Sent!";
+    };
+
+    // Incoming events
+    eventSource.onopen = () => {
+        let event = document.createElement('div');
+        event.innerHTML = `EventSource connected to ${subscribeURL}`;
+        events.appendChild(event);
+    };
+    eventSource.onerror = (e) => {
+        let event = document.createElement('div');
+        event.innerHTML = `EventSource error: Failed to connect to ${subscribeURL}`;
+        events.appendChild(event);
+    };
+    eventSource.onmessage = (e) => {
+        let event = document.createElement('div');
+        event.innerHTML = e.data;
+        events.appendChild(event);
+    };
+</script>
 </body>
 </html>
